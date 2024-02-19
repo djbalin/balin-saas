@@ -6,11 +6,15 @@ import {
   getKindeServerSession,
 } from "@kinde-oss/kinde-auth-nextjs/server";
 import { Button } from "@/components/ui/button";
+import { redirect } from "next/navigation";
 // import { getKindeServerSession } from "@kinde-oss/kinde-auth-nextjs/dist/types/server";
 
 export default async function Home() {
   const { getUser } = getKindeServerSession();
   const user = await getUser();
+  if (user) {
+    return redirect("/dashboard");
+  }
   return (
     <section className="flex items-center justify-center bg-background h-[90vh]">
       <div className="relative items-center w-full px-5 py-12 mx-auto lg:px-16 max-w-7xl md:px-12">
